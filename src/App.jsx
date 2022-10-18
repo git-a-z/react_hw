@@ -1,35 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
-import { Form } from './components/Form/Form';
-import { Count } from './components/Count/Count';
 import { Message } from './components/Message/Message';
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export const App = () => {
-  const [name, setName] = useState("Geek")  
-  const [text, setText] = useState("Text")
+  const [messageList, setMessageList] = useState([])
 
-  const handleChangeName = (ev) => {
-    setName(ev.target.value)
-  }
+  const data = [
+    {
+      id: 1,
+      text: "text1",
+      author: "author-1"
+    },
+    {
+      id: 2,
+      text: "text2",
+      author: "author-2"
+    }
+  ]
 
-  const handleChangeText = (ev) => {
-    setText(ev.target.value)
-  }
+  useEffect(() => {
+    setMessageList(data)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
-    <div className="App">      
-      <Message text={text}/>
-      <input onChange={handleChangeText} value={text}/>
-      <hr/>      
-      <Count name={name}/>
-      <input onChange={handleChangeName} value={name}/>
-      <hr/>      
-      <Form/>
-      
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
+    <div className="App">
+      <Message setMessageList={setMessageList} />
+      {messageList.map((e,i) => <div key={i}>
+        <p>{e.id}. {e.author}: "{e.text}"</p>
+        <hr/>
+      </div>)}
     </div>
   );
 }

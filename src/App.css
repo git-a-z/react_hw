@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  background-color: snow;
 }
 
 .App-logo {
@@ -37,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.ListBox {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.ListBoxLeft {
+  width: 25%;
+}
+
+.ListBoxRight {
+  width: 75%;
+}
+

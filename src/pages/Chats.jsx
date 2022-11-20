@@ -26,7 +26,7 @@ export const Chats = () => {
             },
             {
                 id: 2,
-                text: "Well, hello to you, too, Alice!",
+                text: "Well, hello to you too, Alice!",
                 author: "You",
             },
         ]
@@ -75,22 +75,22 @@ export const Chats = () => {
                 <div className="ListBox">
                     <div className="ListBoxLeft">
                         {chatList.map((e, id) => <div key={id}>
-                            <Link to={`${id}`}>
-                                <List sx={style} component="nav" aria-label="mailbox folders">
-                                    <ListItemButton divider>
+                            <List sx={style} component="nav" aria-label="mailbox folders">
+                                <Link to={`${id}`}>
+                                    <ListItemButton>
                                         <ListItemIcon>
                                             <StarIcon color="primary" />
                                         </ListItemIcon>
-                                        <ListItemText className="ChatTitle" primary={e.name + ' with ' + e.penpal} />
+                                        <ListItemText sx={style} className="ChatTitle" primary={e.name + ' with ' + e.penpal} />
                                     </ListItemButton>
-                                </List>
-                            </Link>
+                                </Link>
+                            </List>
                         </div>)}
                     </div>
                     <div className="ListBoxRight">
-                        {(chatId && chatList[chatId]) ? <Message props={{ setChatList, setState, chatId, chatList, state }} /> : ""}
                         {(chatId && chatList[chatId])
-                            ? UpdateMessages(chatList, chatId, style)
+                            ? <><Message props={{ setChatList, setState, chatId, chatList, state }} />
+                                {UpdateMessages(chatList, chatId, style)}</>
                             : <h4 className="LeftText">Select chat...</h4>}
                     </div>
                 </div>

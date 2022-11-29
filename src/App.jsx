@@ -1,14 +1,14 @@
-import './App.css'
+import './App.css';
 import {
     BrowserRouter,
     Routes,
     Route,
-} from "react-router-dom"
-import { NavBar } from "./components/NavBar"
-import { Home } from "./pages/Home"
-import { Chats } from "./pages/Chats"
-import { Profile } from "./pages/Profile"
-import { NotFound } from "./pages/NotFound"
+} from "react-router-dom";
+import { NavBar } from "./components/NavBar";
+import { Home } from "./pages/Home";
+import { Chats } from "./pages/Chats";
+import { Profile } from "./pages/Profile";
+import { NotFound } from "./pages/NotFound";
 
 export const App = () => {
     return (
@@ -25,5 +25,5 @@ export const App = () => {
                 </Routes>
             </BrowserRouter>
         </div>
-    )
+    );
 }

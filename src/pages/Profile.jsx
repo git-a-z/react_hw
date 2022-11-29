@@ -1,28 +1,40 @@
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
-import { useCallback } from "react";
-import { toggleShowName } from "../redux/profile/actions";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+
+import { useCallback, useState } from "react";
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+
+import * as actions from "../redux/profile/actions";
+import { getProfileName } from "../redux/profile/selectors";
 
 export const Profile = () => {
-    const { showName, name } = useSelector((state) => state);
+    const profileName = useSelector(getProfileName, shallowEqual);
     const dispatch = useDispatch();
+    const [value, setValue] = useState(profileName);
 
-    const setShowName = useCallback(() => {
-        dispatch(toggleShowName);
-    }, [dispatch]);
+    const handleChange = useCallback((e) => {
+        setValue(e.target.value);
+    }, []);
+
+    const setName = useCallback(() => {
+        dispatch(actions.changeName(value));
+    }, [dispatch, value]);
 
     return (
         <div>
             <h1>Profile</h1>
-            <input
-                type="checkbox"
-                id="showNameCheckbox"
-                checked={showName}
-                value={showName}
-                onChange={setShowName}
-            />
-            <label htmlFor="showNameCheckbox">Show Name</label>
-            {showName && <div>{name}</div>}
+            <div className='InputBox'>
+                <Box>
+                    <TextField value={value} onChange={handleChange}
+                        label="Name" />
+                </Box>
+                <div className='EmptySpace'></div>
+                <Button variant="contained"
+                    onClick={setName}>
+                    Change Name
+                </Button>
+            </div>
         </div>
     )
 }

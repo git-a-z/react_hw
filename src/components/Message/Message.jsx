@@ -1,39 +1,43 @@
-import style from './Message.module.css'
-import { useEffect, useState, useRef } from "react"
-import Box from '@mui/material/Box'
-import InputLabel from '@mui/material/InputLabel'
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
-import Select from '@mui/material/Select'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import SendIcon from '@mui/icons-material/Send'
+import style from './Message.module.css';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import SendIcon from '@mui/icons-material/Send';
+import TextField from '@mui/material/TextField';
+
+import { useEffect, useState, useRef, useCallback } from "react";
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+
+import * as actions from '../../redux/messages/actions';
+import { AUTHORS } from './Authors';
+import { getChatList } from "../../redux/chats/selectors";
 
 export const Message = ({ props }) => {
-    const [text, setValue] = useState("some text")
-    const [author, setAuthor] = useState(0)
-    const arrOptions = ['You', props.chatList[props.chatId].penpal]
-    const inputRef = useRef(null)
-    const [lastMessage, setLastMessage] = useState("")
+    const chatId = props.chatId;
+    const chatList = useSelector(getChatList, shallowEqual);
+    const dispatch = useDispatch();
+    const [text, setText] = useState("some text");
+    const [author, setAuthor] = useState(0);
+    const arrOptions = [AUTHORS.ME, chatList[chatId].penpal];
+    const inputRef = useRef(null);
 
     const options = arrOptions.map((text, index) => {
-        return <MenuItem key={index} value={index}>{text}</MenuItem>
+        return <MenuItem key={index} value={index}>{text}</MenuItem>;
     })
 
     useEffect(() => {
-        setAuthor((author + 1) % arrOptions.length)
-        inputRef.current?.focus()
-        console.log("useEffect")
-        props.setState({ key: Math.random() })
+        inputRef.current?.focus();
+        console.log("Message. useEffect");
+    }, [author]);
 
-        if (lastMessage !== "") {
-            setTimeout(() => {
-                console.log(lastMessage.author + " wrote: " + lastMessage.text)
-            }, 500)
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [lastMessage])
+    const addMessage = useCallback((chatId, text, authorIndex, arrOptions) => () => {
+        dispatch(actions.addMessage(chatId, text, arrOptions[authorIndex]));
+        setAuthor((authorIndex + 1) % arrOptions.length);
+    }, [dispatch]);
 
     return (
         <div className={style.message}>
@@ -47,23 +51,12 @@ export const Message = ({ props }) => {
             </Box>
 
             <Box sx={{ minWidth: 120 }}>
-                <TextField inputRef={inputRef} value={text} onChange={(e) => setValue(e.target.value)}
+                <TextField inputRef={inputRef} value={text} onChange={(e) => setText(e.target.value)}
                     label="Message" />
             </Box>
 
             <Button variant="contained"
-                onClick={() => {
-                    props.setChatList((prevstate) => {
-                        const obj = {
-                            id: prevstate[props.chatId].messages.length + 1,
-                            text: text,
-                            author: arrOptions[author]
-                        }
-                        setLastMessage(obj)
-                        prevstate[props.chatId].messages = [...prevstate[props.chatId].messages, obj]
-                        return prevstate
-                    })
-                }}>
+                onClick={addMessage(chatId, text, author, arrOptions)}>
                 <ListItemIcon>
                     <SendIcon className="Text" />
                 </ListItemIcon>

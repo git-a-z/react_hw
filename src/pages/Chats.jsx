@@ -1,16 +1,13 @@
 import '../App.css';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import StarIcon from '@mui/icons-material/Star';
-import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
@@ -18,9 +15,11 @@ import * as actions from '../redux/chats/actions';
 import * as actionsMessages from '../redux/messages/actions';
 import { AUTHORS } from '../components/Message/Authors';
 import { Message } from '../components/Message/Message';
-import { getChatList } from "../redux/chats/selectors";
-import { getMessageList } from "../redux/messages/selectors";
-import { getProfileName } from "../redux/profile/selectors";
+import { getChatList } from '../redux/chats/selectors';
+import { getMessageList } from '../redux/messages/selectors';
+import { getProfileName } from '../redux/profile/selectors';
+import { MyButton } from '../components/Button/Button';
+import { MyTextField } from '../components/TextField/TextField';
 
 export const Chats = () => {
     const chatList = useSelector(getChatList, shallowEqual);
@@ -82,15 +81,16 @@ export const Chats = () => {
                         </div>)}
                         <div className='InputBox'>
                             <div className='EmptySpace'></div>
-                            <Box>
-                                <TextField value={value} onChange={handleChange}
-                                    label="New chat penpal" />
-                            </Box>
+
+                            <MyTextField value={value} onChange={handleChange}
+                                label="New chat penpal">
+                            </MyTextField>
+
                             <div className='EmptySpace'></div>
-                            <Button variant="contained"
-                                onClick={addChat}>
+
+                            <MyButton onClick={addChat}>
                                 +
-                            </Button>
+                            </MyButton>
                         </div>
                     </div>
                     <div className="ListBoxRight">

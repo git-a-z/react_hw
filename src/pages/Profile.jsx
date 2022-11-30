@@ -1,12 +1,10 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import * as actions from "../redux/profile/actions";
-import { getProfileName } from "../redux/profile/selectors";
+import { getProfileName } from '../redux/profile/selectors';
+import { MyButton } from '../components/Button/Button';
+import { MyTextField } from '../components/TextField/TextField';
 
 export const Profile = () => {
     const profileName = useSelector(getProfileName, shallowEqual);
@@ -25,15 +23,15 @@ export const Profile = () => {
         <div>
             <h1>Profile</h1>
             <div className='InputBox'>
-                <Box>
-                    <TextField value={value} onChange={handleChange}
-                        label="Name" />
-                </Box>
+                <MyTextField value={value} onChange={handleChange}
+                    label="Name">
+                </MyTextField>
+
                 <div className='EmptySpace'></div>
-                <Button variant="contained"
-                    onClick={setName}>
+
+                <MyButton onClick={setName}>
                     Change Name
-                </Button>
+                </MyButton>
             </div>
         </div>
     )

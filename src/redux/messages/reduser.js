@@ -7,24 +7,24 @@ const initState = {
         0: [
             {
                 id: 0,
-                text: "Hello, hello, hello!",
+                text: 'Hello, hello, hello!',
                 author: AUTHORS.ALICE,
             },
             {
                 id: 1,
-                text: "Well, hello to you too, Alice!",
+                text: 'Well, hello to you too, Alice!',
                 author: AUTHORS.ME,
             },
         ],
         1: [
             {
                 id: 0,
-                text: "Hi!",
+                text: 'Hi!',
                 author: AUTHORS.KATE,
             },
             {
                 id: 1,
-                text: "Wow! Long time no see!",
+                text: 'Wow! Long time no see!',
                 author: AUTHORS.ME,
             },
         ]

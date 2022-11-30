@@ -3,12 +3,12 @@ import { AUTHORS } from '../../components/Message/Authors';
 
 const initChats = [{
     id: 0,
-    name: "Chat",
+    name: 'Chat',
     penpal: AUTHORS.ALICE,
 },
 {
     id: 1,
-    name: "Chat",
+    name: 'Chat',
     penpal: AUTHORS.KATE,
 }];
 
@@ -25,7 +25,7 @@ export const chatsReducer = (state = initState, action) => {
                     ...state.chatList,
                     {
                         id: state.chatList.length,
-                        name: "Chat",
+                        name: 'Chat',
                         penpal: action.name,
                     },
                 ],

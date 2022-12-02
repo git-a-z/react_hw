@@ -19,6 +19,9 @@ export const NavBar = () => {
                     <Button color="inherit">
                         <Link className="TabBar" to={'/profile'}>Profile</Link>
                     </Button>
+                    <Button color="inherit">
+                        <Link className="TabBar" to={'/articles'}>Articles</Link>
+                    </Button>
                 </Toolbar>
             </AppBar>
         </Box>

@@ -26,7 +26,6 @@ export const Message = ({ props }) => {
 
     useEffect(() => {
         inputRef.current?.focus();
-        console.log("Message. useEffect");
     }, [author]);
 
     const addMessage = useCallback((chatId, text, authorIndex, arrOptions) => () => {

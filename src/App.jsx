@@ -9,6 +9,7 @@ import { Home } from './pages/Home';
 import { Chats } from './pages/Chats';
 import { Profile } from './pages/Profile';
 import { NotFound } from './pages/NotFound';
+import { Articles } from './pages/Articles';
 
 export const App = () => {
     return (
@@ -21,6 +22,7 @@ export const App = () => {
                         <Route path=':chatId' element={<Chats />} />
                     </Route>
                     <Route path='profile' element={<Profile />} />
+                    <Route path='articles' element={<Articles />} />
                     <Route path='*' element={<NotFound />} />
                 </Routes>
             </BrowserRouter>

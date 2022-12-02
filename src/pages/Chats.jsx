@@ -1,4 +1,5 @@
 import '../App.css';
+import { style } from './style';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -28,11 +29,6 @@ export const Chats = () => {
     const dispatch = useDispatch();
     const { chatId } = useParams();
     const [value, setValue] = useState('New');
-
-    const style = {
-        width: '100%',
-        bgcolor: 'background.paper',
-    };
 
     const theme = createTheme({
         palette: {
@@ -106,14 +102,16 @@ export const Chats = () => {
 }
 
 const UpdateMessages = (messageList, chatId, style, profileName) => {
-    return [...messageList[chatId] || []].reverse().map((e, i) =>
-        <div key={i}>
-            <List sx={style} component="nav" aria-label="mailbox folders">
-                <ListItem button divider>
-                    <ListItemText primary={(e.id + 1) + '. '
-                        + (e.author === AUTHORS.ME ? profileName : e.author)
-                        + ': «' + e.text + '»'} />
-                </ListItem>
-            </List>
-        </div>);
+    return (
+        <List sx={style} component="nav" aria-label="mailbox folders">
+            {[...messageList[chatId] || []].reverse().map((e, i) =>
+                <div key={i}>
+                    <ListItem button divider>
+                        <ListItemText primary={(e.id + 1) + '. '
+                            + (e.author === AUTHORS.ME ? profileName : e.author)
+                            + ': «' + e.text + '»'} />
+                    </ListItem>
+                </div>)
+            }
+        </List>)
 }

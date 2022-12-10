@@ -1,19 +1,19 @@
-export const GET_ARTICLES = 'ARTICLES::GET_ARTICLES';
+export const SET_ARTICLES = 'ARTICLES::SET_ARTICLES';
 export const SET_LOADING = 'ARTICLES::SET_LOADING';
 export const SET_ERROR = 'ARTICLES::SET_ERROR';
 export const SET_ERROR_MESSAGE = 'ARTICLES::SET_ERROR_MESSAGE';
 
-export const getArticles = (data) => ({
-    type: GET_ARTICLES,
+export const setArticles = (data) => ({
+    type: SET_ARTICLES,
     data,
 });
 
-export const getArticlesWithMiddleware = (url) => async (dispatch, getState) => {
+export const setArticlesWithMiddleware = (url) => async (dispatch, getState) => {
     try {
         const response = await fetch(url)
         if (response.ok) {
             const data = await response.json()
-            dispatch(getArticles(data));
+            dispatch(setArticles(data));
         } else {
             dispatch(setError(true));
             dispatch(setErrorMessage(`Error: ${response.status}`));

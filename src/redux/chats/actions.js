@@ -1,10 +1,10 @@
 export const ADD_CHAT = 'CHATS::ADD_CHAT';
 export const DELETE_CHAT = 'CHATS::DELETE_CHAT';
 
-export const addChat = (name) => ({
+export const addChat = (name, id) => ({
     type: ADD_CHAT,
-    name: name,
-    id: Math.floor(Math.random() * 1000),
+    name,
+    id,
 });
 
 export const deleteChat = (id) => ({

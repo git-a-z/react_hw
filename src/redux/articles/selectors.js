@@ -1,4 +1,4 @@
-export function getArticleList(state) {
+export function setArticleList(state) {
     return state.articles.articleList;
 }
 

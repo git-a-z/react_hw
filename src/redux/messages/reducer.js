@@ -50,11 +50,12 @@ export const messagesReducer = (state = initState, action) => {
             };
         }
         case actions.DELETE_CHAT_MESSAGES:
+            const newMessageList = { ...state.messageList };
+            delete newMessageList[action.chatId];
             return {
                 ...state,
                 messageList: {
-                    ...state.messageList,
-                    [action.chatId]: [],
+                    ...newMessageList,
                 },
             }
         default: return state;

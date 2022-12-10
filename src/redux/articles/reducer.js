@@ -9,7 +9,7 @@ export const initState = {
 
 export const articlesReducer = (state = initState, action) => {
     switch (action.type) {
-        case actions.GET_ARTICLES:
+        case actions.SET_ARTICLES:
             return {
                 ...state,
                 articleList: action.data,

@@ -26,9 +26,7 @@ export const Profile = () => {
                 <MyTextField value={value} onChange={handleChange}
                     label="Name">
                 </MyTextField>
-
                 <div className='EmptySpace'></div>
-
                 <MyButton onClick={setName}>
                     Change Name
                 </MyButton>
